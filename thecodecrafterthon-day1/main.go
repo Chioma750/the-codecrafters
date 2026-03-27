@@ -10,7 +10,7 @@ func main() {
 		var input1 string
 		fmt.Print("Enter input1 : ")
 		fmt.Scanln(&input1)
-		num1, err := strconv.Atoi(input1)
+		num1, err := strconv.ParseFloat(input1, 64)
 		if err != nil {
 			fmt.Println("Enter numbers only")
 			continue
@@ -30,10 +30,15 @@ func main() {
 			fmt.Println("sub <a> <b> → divition")
 		}
 
+		if operator != "+" && operator != "-" && operator != "*" && operator != "/" {
+			fmt.Println("Invalid operation")
+			continue
+		}
+
 		var input2 string
 		fmt.Print("Enter input2 : ")
 		fmt.Scanln(&input2)
-		num2, err := strconv.Atoi(input2)
+		num2, err := strconv.ParseFloat(input2, 64)
 		if err != nil {
 			fmt.Println("Enter numbers only")
 		}
