@@ -5,15 +5,27 @@ import (
 	"strconv"
 )
 
+func hexToBinary(hex string) (int64, error) {
+	return strconv.ParseInt(hex, 16, 64)
+}
+
+func binToDecimal(bin string) (int64, error) {
+	return strconv.ParseInt(bin, 2, 64)
+}
+
+func decToHex(dec int64) string {
+	return strconv.FormatInt(dec, 16)
+}
+
+func decToBin(dec int64) string {
+	return strconv.FormatInt(dec, 2)
+}
+
 func main() {
 	for {
 		var input string
-		fmt.Print("Enter a word")
+		fmt.Print("Enter a word : ")
 		fmt.Scanln(&input)
-
-		var base int
-		fmt.Println("Enter a number")
-		fmt.Scanln(&base)
 
 		var operator string
 		fmt.Print("choose input bases (hex, bin, dec, exit): ")
@@ -21,24 +33,29 @@ func main() {
 
 		if operator == "exit" {
 			fmt.Println("exiting..")
-			break
+			return
 		}
 		if operator != "hex" && operator != "bin" && operator != "dec" && operator != "exit" {
 			fmt.Println("invalid")
 			continue
 		}
-
-		if operator == "hex" && operator == "bin" && operator == "dec" {
-			switch operator {
-			case "hex":
-				a, err := strconv.ParseInt(input, base, 64)
-				if err != nil {
-					fmt.Println("error")
-				}
-				fmt.Println(strconv.FormatInt(a, 10))
+		if operator == "hex" {
+			fmt.Println(hexToBinary(input))
+		}
+		if operator == "bin" {
+			fmt.Println(binToDecimal(input))
+		}
+		if operator == "dec" {
+			i, err := strconv.ParseInt(input, 10, 64)
+			if err != nil {
+				fmt.Println("Invalid Decimal")
 			}
-			continue
+			fmt.Println(decToHex(i))
+
+			b, _ := strconv.ParseInt(input, 10, 64)
+			fmt.Println(decToBin(b))
 		}
 
 	}
+
 }
