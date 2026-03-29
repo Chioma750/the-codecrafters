@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 func hexToBinary(hex string) (int64, error) {
@@ -40,17 +41,27 @@ func main() {
 			continue
 		}
 		if operator == "hex" {
-			fmt.Println(hexToBinary(input))
+			i, err := hexToBinary(input)
+			if err != nil {
+				fmt.Println("Invalid Hex")
+			}else {
+			fmt.Println("Decimal: ", i)
+			}
 		}
 		if operator == "bin" {
-			fmt.Println(binToDecimal(input))
+			i, err := binToDecimal(input)
+			if err != nil {
+				fmt.Println("Invalid Bin")
+			}else {
+				fmt.Println("Decimal: ", i)
+			}
 		}
 		if operator == "dec" {
 			i, err := strconv.ParseInt(input, 10, 64)
 			if err != nil {
 				fmt.Println("Invalid Decimal")
 			}
-			fmt.Println(decToHex(i))
+			fmt.Println(strings.ToUpper(decToHex(i)))
 
 			b, _ := strconv.ParseInt(input, 10, 64)
 			fmt.Println(decToBin(b))
