@@ -39,7 +39,7 @@ func Title(name string) string {
 		"to":  true,
 		"by":  true,
 		"in":  true,
-		"of":  true,
+		"of":  false,
 		"up":  true,
 		"as":  true,
 		"is":  true,
@@ -53,47 +53,82 @@ func Title(name string) string {
 	}
 	return strings.Join(text, " ")
 }
-
+// this handles converting words to snackcase
 func snake(name string) string {
 	w := strings.ToLower(name)
 	return strings.ReplaceAll(w, " ", "_")
 }
 
+func reverse(word string) string {
+	if len(word) == 0 {
+		return ""
+	}
+
+	result := strings.Fields(word)
+	for i := 0; i < len(result); i++ {
+		result[i] = reverse(result[i][1:]) + string(result[i][0])
+	}
+
+	return strings.Join(result, " ")
+}
+
 func main() {
 	for {
-		var input string
+
 		fmt.Print("Enter a word : ")
-		fmt.Scanln(&input)
+		reader := bufio.NewReader(os.Stdin)
+		name, _ := reader.ReadString('\n')
+		// var input string
+		// fmt.Scanln(&input)
 
 		var operator string
-		fmt.Print("Choose input transformations (UpperCase, LowerCase, Capitalize, Title, snake, exit): ")
+		fmt.Print("Choose input transformations (UpperCase, LowerCase, Capitalize, Title, snake, reverse, exit): ")
 		fmt.Scanln(&operator)
 
 		if operator == "exit" {
 			fmt.Println("exiting...")
 			return
 		}
-		if operator != "UpperCase" && operator != "LowerCase" && operator != "Capitalize" && operator != "Title" && operator != "snake" && operator != "exit" {
+
+		switch operator {
+		case "UpperCase":
+			fmt.Println(UpperCase(name))
+		case "LowerCase":
+			fmt.Println(LowerCase(name))
+		case "Capitalize":
+			fmt.Println(Capitalize(name))
+		case "Title":
+			fmt.Println(Title(name))
+		case "snake":
+			fmt.Println(snake(name))
+		case "reverse":
+			fmt.Println(reverse(name))
+		}
+
+		if operator != "UpperCase" && operator != "LowerCase" && operator != "Capitalize" && operator != "Title" && operator != "snake" && operator != "reverse" && operator != "exit" {
 			fmt.Println("Unrecognised")
+			fmt.Print("Choose input transformations (UpperCase, LowerCase, Capitalize, Title, snake, reverse, exit): " )
 			continue
 		}
 
-		reader := bufio.NewReader(os.Stdin)
-		name, _ := reader.ReadString('\n')
+	
 
 		//fmt.Print("Output 1: ")
-		fmt.Println(UpperCase(name))
 
-		//fmt.Print("Output 2: ")
-		fmt.Println(LowerCase(name))
+		
+	
+		
 
-		//fmt.Print("Output 3: ")
-		fmt.Println(Capitalize(name))
+		// fmt.Print("Output 2: ")
+		// fmt.Println(LowerCase(name))
 
-		//fmt.Print("Output 4: ")
-		fmt.Println(Title(name))
+		// fmt.Print("Output 3: ")
+		// fmt.Println(Capitalize(name))
 
-		//fmt.Print("Output 5: ")
-		fmt.Println(snake(name))
+		// fmt.Print("Output 4: ")
+		// fmt.Println(Title(name))
+
+		// fmt.Print("Output 5: ")
+		// fmt.Println(snake(name))
 	}
 }
