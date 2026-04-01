@@ -53,10 +53,13 @@ func Title(name string) string {
 	}
 	return strings.Join(text, " ")
 }
+
 // this handles converting words to snackcase
 func snake(name string) string {
 	w := strings.ToLower(name)
 	return strings.ReplaceAll(w, " ", "_")
+	//return strings.Join(strings.Fields(strings.ToLower(name)), "")
+
 }
 
 func reverse(word string) string {
@@ -82,53 +85,47 @@ func main() {
 		// fmt.Scanln(&input)
 
 		var operator string
-		fmt.Print("Choose input transformations (UpperCase, LowerCase, Capitalize, Title, snake, reverse, exit): ")
+		fmt.Println("=== Choose input transformations ===")
+		fmt.Println()
+		fmt.Println("[1] UpperCase")
+		fmt.Println("[2] LowerCase")
+		fmt.Println("[3] Capitalize")
+		fmt.Println("[4] Title")
+		fmt.Println("[5] snake")
+		fmt.Println("[6] reverse")
+		fmt.Println("[7] exit")
+		fmt.Println()
 		fmt.Scanln(&operator)
 
-		if operator == "exit" {
-			fmt.Println("exiting...")
+		// if operator == "exit" {
+		// 	fmt.Println("exiting..")
+		// 	return
+
+		// }
+
+		switch operator {
+		case "1":
+			fmt.Println("Output: ", UpperCase(name))
+		case "2":
+			fmt.Println(LowerCase(name))
+		case "3":
+			fmt.Println(Capitalize(name))
+		case "4":
+			fmt.Println(Title(name))
+		case "5":
+			fmt.Println(snake(name))
+		case "6":
+			fmt.Println(reverse(name))
+		case "7":
+			fmt.Println("exiting... \n Goodbye...")
 			return
 		}
 
-		switch operator {
-		case "UpperCase":
-			fmt.Println(UpperCase(name))
-		case "LowerCase":
-			fmt.Println(LowerCase(name))
-		case "Capitalize":
-			fmt.Println(Capitalize(name))
-		case "Title":
-			fmt.Println(Title(name))
-		case "snake":
-			fmt.Println(snake(name))
-		case "reverse":
-			fmt.Println(reverse(name))
-		}
-
-		if operator != "UpperCase" && operator != "LowerCase" && operator != "Capitalize" && operator != "Title" && operator != "snake" && operator != "reverse" && operator != "exit" {
+		if operator != "1" && operator != "2" && operator != "3" && operator != "4" && operator != "5" && operator != "6" && operator != "7" {
 			fmt.Println("Unrecognised")
-			fmt.Print("Choose input transformations (UpperCase, LowerCase, Capitalize, Title, snake, reverse, exit): " )
+			// fmt.Print("Choose input transformations (UpperCase, LowerCase, Capitalize, Title, snake, reverse, exit): ")
 			continue
 		}
 
-	
-
-		//fmt.Print("Output 1: ")
-
-		
-	
-		
-
-		// fmt.Print("Output 2: ")
-		// fmt.Println(LowerCase(name))
-
-		// fmt.Print("Output 3: ")
-		// fmt.Println(Capitalize(name))
-
-		// fmt.Print("Output 4: ")
-		// fmt.Println(Title(name))
-
-		// fmt.Print("Output 5: ")
-		// fmt.Println(snake(name))
 	}
 }
