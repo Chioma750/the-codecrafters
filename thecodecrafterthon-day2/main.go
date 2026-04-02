@@ -60,6 +60,7 @@ func main() {
 			i, err := strconv.ParseInt(input, 10, 64)
 			if err != nil {
 				fmt.Println("Invalid Decimal")
+				continue
 			}
 			fmt.Println(strings.ToUpper(decToHex(i)))
 
